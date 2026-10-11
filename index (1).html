@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>TRIPLE MASTERY</title>
+<style>
+:root{--bg:#f4f6f9;--cd:#fff;--tx:#1b1f27;--mu:#667085;--ac:#2f6fed;--ok:#1f9d55;--bd:#dfe3ea;--lt:#f0d9b5;--dk:#b58863;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12151b;--cd:#1b2029;--tx:#e8ebf0;--mu:#97a0b0;--bd:#2b3240}}
+:root[data-theme=dark]{--bg:#12151b;--cd:#1b2029;--tx:#e8ebf0;--mu:#97a0b0;--bd:#2b3240}
+*{box-sizing:border-box}html,body{height:auto}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,Segoe UI,Roboto,sans-serif}
+#app{max-width:760px;margin:0 auto;padding:10px 10px 80px}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--cd);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;border:0;background:none;color:var(--mu);padding:12px 2px;font-weight:700;font-size:11px;letter-spacing:.5px}nav button.on{color:var(--ac);box-shadow:inset 0 3px var(--ac)}
+.c{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:12px;margin:10px 0}h2,h3{margin:2px 0 8px}small,em{color:var(--mu);font-style:normal}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.s{background:var(--bg);border-radius:8px;padding:8px}.s b{font-size:20px;display:block}
+.t{display:flex;gap:10px;align-items:center;padding:8px;border-bottom:1px solid var(--bd);cursor:pointer}.t span{font-size:20px}
+.r{display:flex;gap:8px;align-items:center;margin:5px 0}.r span{width:90px;font-size:13px}.r i{flex:1;height:9px;background:var(--bg);border-radius:5px;overflow:hidden}.r b{display:block;height:100%;background:var(--ac)}.r em{width:56px;text-align:right;font-size:12px}
+.b,button.b{background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:9px 12px;margin:3px;font-size:14px}.b.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+input,select,textarea{width:100%;background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:9px;font:inherit;margin:3px 0}
+.big{font-size:26px;letter-spacing:3px;text-align:center;padding:18px;word-break:break-word}
+.bd{display:grid;grid-template-columns:repeat(8,1fr);width:min(92vw,400px);margin:8px auto;border:2px solid var(--dk)}.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:min(6.5vw,32px);cursor:pointer}.lt{background:var(--lt)}.dk{background:var(--dk)}
+.pw{color:#fff;text-shadow:0 0 2px #000,0 0 2px #000}.pk{color:#111}.pal{text-align:center}
+.ed{min-height:160px;border:1px solid var(--bd);border-radius:8px;padding:8px;background:var(--bg)}
+.ov{position:fixed;inset:0;background:var(--bg);z-index:9;padding:20px;padding-top:calc(20px + env(safe-area-inset-top,0px));overflow:auto;max-width:760px;margin:auto}.q{font-size:20px}.g1{display:flex;gap:4px;align-items:center}.g1 small{min-width:26px}.g1 select{width:66px}
+</style></head><body><div id="app"></div><div id="ov"></div>
+<nav id="nav"></nav><datalist id="ul"></datalist>
+<script>
+function dk(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function today(){return dk(new Date())}
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S={};try{S=JSON.parse(localStorage.getItem('tm1'))||{}}catch(e){}
+S=Object.assign({start:today(),rest:[6],tasks:{},time:{},lv:{},ms:{},recall:[],notes:[],qb:[],rev:{},chess:{n:0,ok:0,runs:0},dr:{n:0,ok:0},timer:null,theme:'',units:null,ts:0},S);
+const SEED={Mathematics:['Unit 1: Further on sets','Unit 2: The number system','Unit 3: Solving equations','Unit 4: Solving inequalities','Unit 5: Introduction to trigonometry (G9) / Trigonometric functions (G10)','Unit 6: Regular polygons','Unit 7: Congruency and similarity','Unit 8: Vectors in two dimensions','Unit 9: Relation and function (G10) / Relation and function (G11)','Unit 10: Polynomial functions','Unit 11: Exponential and logarithmic functions','Unit 12: Circle','Unit 13: Solid figures','Unit 14: Coordinate geometry','Unit 15: Rational functions','Unit 16: Matrices','Unit 17: Determinants and their properties','Unit 18: Vectors','Unit 19: Transformation of the plane','Unit 20: Statistics and probability (G11 + G9)'],
+Physics:['Unit 1: Physics and human society (G9 U1 + G11 U1)','Unit 2: Physical quantities','Unit 3: Motion in a straight line (G9) / Motion in one and two dimensions (G11)','Unit 4: Force, work, energy and power','Unit 5: Simple machines','Unit 6: Mechanical oscillation and waves (G9) + Electromagnetic waves and geometrical optics (G11)','Unit 7: Temperature and thermometer','Unit 8: Uniformly accelerated motion','Unit 9: Elasticity and equilibrium of rigid bodies','Unit 10: Static and current electricity (G10) + Heat conduction and calorimetry (G11)','Unit 11: Magnetism','Unit 12: Vectors','Unit 13: Dynamics','Unit 14: Electrostatics and electric circuits','Unit 15: Nuclear physics'],
+Chemistry:['Unit 1: Chemistry and its importance','Unit 2: Measurement and scientific method','Unit 3: Structure of the atom','Unit 4: Atomic structure and periodic properties (G11 U1) / Periodic classification of elements (G9 U4)','Unit 5: Chemical bonding (G11 U2)','Unit 6: Chemical reaction and stoichiometry','Unit 7: Important organic compounds','Chemical kinetics (G11 U4)','Unit 8: Solutions','Unit 9: Energy changes and electrochemistry','Physical states of matter (G11 U3)','Unit 10: Metals and non-metals','Unit 11: Hydrocarbons and their natural resources','Some important oxygen-containing organic compounds (G11 U6)','Unit 12: Chemical equilibrium'],
+Biology:['Unit 1: Introduction to biology','- Sub-fields of biology','- Biology and technology','Unit 2: Characteristics and classification of organisms','Unit 3: Cell','- Cell reproduction','Unit 4: Reproduction','Unit 5: Human health, nutrition and disease','- Human biology','- The human body systems','Unit 6: Animals','Unit 7: Enzymes','Unit 8: Genetics','Unit 9: Ecology','- Ecological interactions','Unit 10: Plants','Unit 11: Biochemical molecules','Unit 12: Population and natural resources'],English:[],Aptitude:[]};
+if(!S.units){S.units={};for(const k in SEED)S.units[k]=SEED[k].map(t=>({t,g:''}))}
+function un(s,i){let a=S.units[s]||[];return a.length?a[(i/6|0)%a.length].t:'any unit'}
+let DBC=null,STO=0,SY='☁️ this device only';
+function sync(t){SY=t;document.querySelectorAll('.sy').forEach(e=>e.textContent=t)}
+const save=()=>{S.ts=Date.now();try{localStorage.setItem('tm1',JSON.stringify(S))}catch(e){}clearTimeout(STO);STO=setTimeout(push,1500)};
+async function push(){if(!DBC)return;try{let{notes,...core}=S;await DBC.doc('core').set({j:JSON.stringify(core)});await DBC.doc('notes').set({j:JSON.stringify(notes)});sync('☁️ synced to your account')}catch(e){sync('☁️ sync failed (data safe on this device)')}}
+async function pull(){try{if(!window.claude)return;let u=await claude.use('user'),db=await claude.use('db');if(!u||!db)return;let id=await u.id();if(!id)return;DBC=db.collection('data/users/'+id);let[c,n]=await Promise.all([DBC.doc('core').get(),DBC.doc('notes').get()]);if(c.exists){let r=JSON.parse(c.data().j);if((r.ts||0)>S.ts){Object.assign(S,r,{notes:n.exists?JSON.parse(n.data().j):S.notes});try{localStorage.setItem('tm1',JSON.stringify(S))}catch(e){}render();sync('☁️ loaded from your account');return}}sync('☁️ account connected');push()}catch(e){sync('☁️ this device only')}}
+const addD=(k,n)=>{let d=new Date(k+'T00:00');d.setDate(d.getDate()+n);return dk(d)};
+const dayNum=k=>Math.round((Date.parse(k)-Date.parse(S.start))/864e5);
+const TH=['Forks','Pins','Skewers','Discovered attacks','Double attacks','Removing the defender','Deflection','Attraction','Back-rank tactics','Mating patterns','Calculation lines','Mixed puzzles'];
+const WX=[['Random words','Number sequences','Object memory','Sequence recall'],['Forward/backward numbers','Letter-number recall','Mental arithmetic + recall','Paragraph recall'],['Memory palace','Word association','Story memory','Object location'],['Dual-task memory','Long sequences','Delayed recall','Chess + memory combo']];
+const SU=['Mathematics','Physics','Chemistry','Biology','English','Aptitude'],CATS=['Chess','Memory','Math','Physics','Chemistry','Biology','English','Aptitude'];
+function plan(k){let i=dayNum(k);if(i<0||S.rest.includes(new Date(k+'T00:00').getDay()))return[];let x=WX[Math.min(3,(i%30)/7|0)];return[
+{id:'c1',g:'Chess',t:'Tactics: '+TH[i%12]+' — 20 min'},{id:'c2',g:'Chess',t:'Calculation: 3 positions without moving pieces'},{id:'c3',g:'Chess',t:'Chess memory: rebuild 2 boards'},
+{id:'m1',g:'Memory',t:x[i%4]+' — 15 min'},{id:'m2',g:'Memory',t:'Delayed recall tests (all due)'},
+{id:'e1',g:'Entrance',t:SU[i%6]+' · '+un(SU[i%6],i)+': 45 min study + active recall'},{id:'e2',g:'Entrance',t:SU[(i+1)%6]+': 10 questions from your bank'}]}
+function pct(k){let P=plan(k);if(!P.length)return null;let s=S.tasks[k]||{};return P.filter(t=>s[t.id]==2).length/P.length*100}
+function avg(n){let a=[],k=today();for(let j=0;j<n;j++,k=addD(k,-1)){let p=pct(k);if(p!==null)a.push(p)}return a.length?a.reduce((x,y)=>x+y)/a.length:0}
+function streak(){let s=0,k=today();for(let j=0;j<3650;j++,k=addD(k,-1)){if(dayNum(k)<0)break;let p=pct(k);if(p===null)continue;if(p>=70)s++;else if(j>0)break}return s}
+const sumT=k=>Object.values(S.time[k]||{}).reduce((a,b)=>a+b,0),fmt=s=>s>=3600?Math.floor(s/3600)+'h '+Math.floor(s%3600/60)+'m':Math.floor(s/60)+'m';
+const bar=(l,p,t)=>`<div class=r><span>${l}</span><i><b style="width:${Math.min(100,Math.round(p))}%"></b></i><em>${t??Math.round(p)+'%'}</em></div>`;
+const opt=(a,s)=>a.map(x=>`<option ${x==s?'selected':''}>${x}</option>`).join('');
+const OFF=[6e5,18e5,864e5,6048e5],OL=['10 min','30 min','1 day','7 days'],nxt=r=>r.st.indexOf(0),dueR=()=>S.recall.filter(r=>{let s=nxt(r);return s>=0&&Date.now()>=r.t0+OFF[s]});
+let tab='home',M=null,RT=null,CM={ph:'idle',n:20,t:30,sel:'K'},DR=null,NT=null;
+const GL={k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟'};
+const WORDS='river stone lamp tiger cloud book iron seed mirror bridge candle sand fox clock leaf anchor wheel pearl storm key ladder honey comet violin cactus ember salt harbor feather orbit plum raven tunnel glass maple coin tower moss'.split(' ');
+const MT={words:'Words',num:'Numbers →',back:'Numbers ←',ln:'Letter-number'};
+function gen(t,n){let r=[];for(let i=0;i<n;i++)r.push(t=='words'?WORDS[Math.random()*WORDS.length|0]:t=='ln'?String.fromCharCode(65+Math.random()*26|0)+(Math.random()*10|0):''+(Math.random()*10|0));return r}
+function genPos(n){let sh=a=>a.sort(()=>Math.random()-.5),fr=sh([...Array(64).keys()]),pos={},put=p=>{let j=fr.findIndex(s=>!('Pp'.includes(p)&&(s<8||s>55)));pos[fr.splice(j,1)[0]]=p};put('K');put('k');sh('QRRBBNNPPPPPPPPqrrbbnnpppppppp'.split('')).slice(0,n-2).forEach(put);return pos}
+function bd(m,a){let h='<div class=bd>';for(let i=0;i<64;i++){let p=m[i];h+=`<div class="sq ${((i>>3)+(i&7))%2?'dk':'lt'}" ${a?`data-a=${a} data-v=${i}`:''}>${p?`<span class="${p<'a'?'pw':'pk'}">${GL[p.toLowerCase()]}</span>`:''}</div>`}return h+'</div>'}
+function recs(){let r=[],tp={};S.qb.forEach(q=>{let k=q.s+' – '+q.t;tp[k]=tp[k]||{n:0,ok:0};tp[k].n+=q.n;tp[k].ok+=q.ok});
+let w=Object.entries(tp).filter(e=>e[1].n>0).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n)[0];if(w)r.push(`Spend 30 minutes reviewing ${w[0]} today (${Math.round(w[1].ok/w[1].n*100)}% accuracy).`);
+let m=Object.entries(S.ms).filter(e=>e[1].n>0).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n)[0];if(m)r.push(`Memory: train "${MT[m[0]]}" next (${Math.round(m[1].ok/m[1].n*100)}%).`);
+if(S.chess.runs&&S.chess.ok/S.chess.n<.7)r.push('Chess memory: repeat reconstruction with fewer pieces until above 70%.');if(dueR().length)r.push(dueR().length+' delayed recall test(s) are due now.');return r}
+function home(){let k=today(),P=plan(k),st=S.tasks[k]||{},i=dayNum(k),tt=S.time[k]||{},g=n=>{let a=P.filter(t=>t.g==n);return a.length?a.filter(t=>st[t.id]==2).length/a.length*100:0},p=pct(k)||0,R=recs();
+return `<div class=c><small>${new Date().toDateString()}</small><h2>Cycle ${(i/30|0)+1} · Day ${i%30+1} of 30</h2><small>Cycles repeat forever, so keep training after day 30.</small><br><small class=sy>${SY}</small></div>
+<div class=c><h3>TODAY'S MISSION</h3>${P.length?P.map(t=>`<div class=t data-a=tg data-v="${k}|${t.id}"><span>${['⬜','🟨','✅'][st[t.id]||0]}</span><div><small>${t.g}</small><br>${t.t}</div></div>`).join(''):'<p>🛌 Rest day: no tasks, streak and progress safe.</p>'}
+${bar('Today',p)}${bar('♟️ Chess',g('Chess'))}${bar('🧠 Memory',g('Memory'))}${bar('📚 Entrance',g('Entrance'))}</div>
+<div class=c><h3>TRAIN NEXT</h3>${R.length?R.map(x=>'<p>→ '+x+'</p>').join(''):'<small>Do some exercises and recommendations will appear here.</small>'}</div>
+<div class="c g"><div class=s>🔥 Streak<b>${streak()}</b></div><div class=s>Total today<b>${fmt(sumT(k))}</b></div><div class=s>Chess<b>${fmt(tt.Chess||0)}</b></div><div class=s>Memory<b>${fmt(tt.Memory||0)}</b></div><div class=s>Week<b>${Math.round(avg(7))}%</b></div><div class=s>Month<b>${Math.round(avg(30))}%</b></div></div>
+<div class=c><h3>TIMERS</h3><small>Tap to start; tap again to stop and log the session.</small><div class=g>${CATS.map(c=>`<button class="b ${S.timer&&S.timer.c==c?'on':''}" data-a=tm data-v=${c}>${c}<br>${S.timer&&S.timer.c==c?'<span class=tk>…</span>':fmt(tt[c]||0)}</button>`).join('')}</div></div>`}
+function memory(){let h='<div class=c><h3>🧠 MEMORY TRAINING</h3>';
+if(!M)h+='<small>Level adapts automatically. Perfect recall: +1 item. Mistake: −1.</small><div class=g>'+Object.keys(MT).map(t=>`<button class=b data-a=ms data-v=${t}>${MT[t]}<br><small>level ${S.lv[t]||4}</small></button>`).join('')+'</div>';
+else if(M.ph=='show')h+=`<small>Memorize in order…</small><div class=big>${M.items.join(M.t=='num'||M.t=='back'?' ':' · ')}</div>${M.t=='back'?'<small>You will type them BACKWARDS.</small>':''}`;
+else if(M.ph=='in')h+=`<p>Type what you remember${M.t=='back'?' (reverse order)':''}:</p><input id=mi autocomplete=off placeholder="${M.t=='words'||M.t=='ln'?'separate with spaces':'digits'}"><button class=b data-a=mc>Check</button>`;
+else h+=`<h3>${M.perfect?'✅ Perfect':'❌ '+M.ok+'/'+M.exp.length+' correct'}</h3><p>Answer: <b>${M.exp.join(' ')}</b></p><button class=b data-a=mx>Next</button>`;
+h+='</div><div class=c><h3>⏱ DELAYED RECALL</h3><small>Learn something, write a title and the content. Recall tests are scheduled at 10 min, 30 min, 1 day and 7 days. You must type it from memory.</small><input id=rt placeholder="Title (e.g. Newton laws)"><textarea id=rx rows=3 placeholder="What you learned"></textarea><button class=b data-a=ra>Schedule recall tests</button></div>';
+if(RT){let r=S.recall.find(x=>x.id==RT.id);h+=`<div class=c><h3>Recall: ${esc(r.title)} (${OL[nxt(r)]} test)</h3>${RT.rev?`<p><small>You wrote</small><br>${esc(RT.ans)||'—'}</p><p><small>Original</small><br>${esc(r.text)}</p><button class=b data-a=rg data-v=1>✅</button><button class=b data-a=rg data-v=.5>⚠️</button><button class=b data-a=rg data-v=0>❌</button>`:'<textarea id=ra rows=5 placeholder="Write everything you remember"></textarea><button class=b data-a=rr>Reveal original</button>'}</div>`}
+h+='<div class=c><h3>Schedule</h3>'+(S.recall.map(r=>{let s=nxt(r),d=s<0?'✅ finished':Date.now()>=r.t0+OFF[s]?`<button class=b data-a=rt data-v=${r.id}>TAKE ${OL[s]} TEST</button>`:`<small>next: ${OL[s]} test at ${new Date(r.t0+OFF[s]).toLocaleString()}</small>`;return `<div class=t><div><b>${esc(r.title)}</b><br>${d}</div></div>`}).join('')||'<small>Nothing scheduled.</small>')+'</div>';return h}
+function chess(){let c=CM,h='<div class=c><h3>♟️ CHESS MEMORY: Board reconstruction</h3>';
+if(c.ph=='show')h+=`<p>Memorize! <b>${c.left}s</b></p>`+bd(c.pos);
+else if(c.ph=='build')h+='<small>Pick a piece, then tap squares (✕ erases).</small>'+bd(c.b,'cq')+'<div class=pal>'+[...'KQRBNPkqrbnp'].map(p=>`<button class="b ${c.sel==p?'on':''}" data-a=cp data-v=${p}><span class="${p<'a'?'pw':'pk'}">${GL[p.toLowerCase()]}</span></button>`).join('')+`<button class="b ${c.sel=='x'?'on':''}" data-a=cp data-v=x>✕</button></div><button class=b data-a=cf>Submit</button>`;
+else if(c.ph=='res')h+=`<h2>You remembered ${c.ok}/${c.n} pieces correctly.</h2><p>Wrong: ${c.wr} · Missing: ${c.mi} · Accuracy: ${Math.round(c.ok/c.n*100)}% · Time: ${c.time}s</p><small>Your board</small>${bd(c.b)}<small>Correct position</small>${bd(c.pos)}<button class=b data-a=cx>New position</button>`;
+else h+=`<small>Pieces</small><select id=cn>${[8,14,20,26,32].map(x=>`<option ${x==c.n?'selected':''}>${x}</option>`).join('')}</select><small>Viewing time (seconds)</small><select id=ct>${[15,30,60,120,300].map(x=>`<option ${x==c.t?'selected':''}>${x}</option>`).join('')}</select><button class=b data-a=cs>START</button><p><small>Lifetime: ${S.chess.runs} runs · ${S.chess.n?Math.round(S.chess.ok/S.chess.n*100):0}% pieces correct</small></p>`;
+return h+'</div><div class=c><small>Tactics, calculation training and move/variation memory are planned for the next build.</small></div>'}
+function entrance(){let h=`<div class=c><h3>📚 QUESTION BANK</h3><div class=g><select id=qs>${opt(SU)}</select><select id=qg>${opt([9,10,11,12])}</select></div><input id=qt list=ul placeholder="Unit / Topic"><textarea id=qq rows=2 placeholder="Question"></textarea><textarea id=qa rows=2 placeholder="Answer"></textarea><button class=b data-a=qa>Add question</button><button class=b data-a=qp>▶ Active recall (weak topics first)</button></div><div class=c><h3>By subject</h3>`;
+SU.forEach(s=>{let q=S.qb.filter(x=>x.s==s),n=q.reduce((a,x)=>a+x.n,0),o=q.reduce((a,x)=>a+x.ok,0);h+=bar(s,n?o/n*100:0,q.length+' Q')});h+='</div>';SU.forEach(s=>{h+=`<div class=c><h3>${s}: units</h3>`+(S.units[s]||[]).map((u,i)=>`<div class=g1><small>${u.g?'G'+u.g:''}</small><input data-c=ue data-v="${s}|${i}" value="${esc(u.t)}"><button class=b data-a=ud data-v="${s}|${i}">✕</button></div>`).join('')+`<div class=g1><select id=ug-${s}>${opt(['','9','10','11','12'])}</select><input id=un-${s} placeholder="Add unit (pick grade, e.g. 12)"><button class=b data-a=ua data-v=${s}>+</button></div></div>`});return h}
+function notes(){let n=S.notes.find(x=>NT&&x.id==NT.id),L=S.notes.map(x=>`<div class=t data-a=no data-v=${x.id}><div>${x.s} › G${x.g} › ${esc(x.u)} › <b>${esc(x.p)}</b></div></div>`).join('')||'<small>No notes yet.</small>';
+let tb=[['bold','B'],['italic','I'],['underline','U'],['insertUnorderedList','•'],['insertOrderedList','1.'],['formatBlock|h2','H'],['formatBlock|h3','h'],['hiliteColor|#fde68a','Mark'],['superscript','x²'],['subscript','x₂']].map(a=>`<button class=b data-a=fmt data-v="${a[0]}">${a[1]}</button>`).join('');
+return `<div class=c><h3>📝 NOTES</h3>${L}<button class=b data-a=nn>+ New note</button></div>`+(NT?`<div class=c><div class=g><select id=ns>${opt(SU,n&&n.s)}</select><select id=ng>${opt([9,10,11,12],n&&n.g)}</select></div><input id=nu list=ul placeholder=Unit value="${esc(n?n.u:'')}"><input id=np placeholder=Topic value="${esc(n?n.p:'')}"><div>${tb}</div><div id=ed class=ed contenteditable>${n?n.h:''}</div><button class=b data-a=ns>Save</button><button class=b data-a=nt>🧠 Train my memory</button>${n?'<button class=b data-a=nd>Delete</button>':''}</div>`:'')}
+function progress(){let k=today(),h='<div class=c><h3>Time, last 7 days</h3>';
+let ct={};for(let j=0;j<7;j++){let t=S.time[addD(k,-j)]||{};for(let c in t)ct[c]=(ct[c]||0)+t[c]}let mx=Math.max(1,...Object.values(ct));CATS.forEach(c=>h+=bar(c,(ct[c]||0)/mx*100,fmt(ct[c]||0)));
+h+='</div><div class=c><h3>Memory</h3>';Object.keys(MT).forEach(t=>{let m=S.ms[t]||{n:0,ok:0};h+=bar(MT[t],m.n?m.ok/m.n*100:0,'L'+(S.lv[t]||4))});h+=bar('Chess memory',S.chess.n?S.chess.ok/S.chess.n*100:0)+bar('Active recall',S.dr.n?S.dr.ok/S.dr.n*100:0)+'</div>';
+let rv=S.rev[k]||[];h+=`<div class=c><h3>Daily review</h3>${['What did I study?','What did I remember?','What did I forget?','What mistakes did I make?','What to review tomorrow?'].map((q,i)=>`<small>${q}</small><textarea id=rv${i} rows=2>${esc(rv[i]||'')}</textarea>`).join('')}<button class=b data-a=rv>Save review</button></div>`;
+h+=`<div class=c><h3>Settings</h3><small>Rest days (no tasks, streak safe)</small><div>${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map((d,i)=>`<button class="b ${S.rest.includes(i)?'on':''}" data-a=rs data-v=${i}>${d}</button>`).join('')}</div><button class=b data-a=th>Theme: ${S.theme||'auto'}</button><p><small class=sy>${SY}</small><br><small>Works offline. When online it syncs to your claude.ai account: open this same page on PC and phone with the same login.</small></p></div>`;return h}
+function ovl(){if(!DR)return'';let it=DR.items[DR.i];if(!it)return `<div class=ov><h2>Session done</h2><p>✅ ${DR.t[1]} · ⚠️ ${DR.t[.5]} · ❌ ${DR.t[0]}</p><button class=b data-a=dx>Close</button></div>`;
+return `<div class=ov><small>${DR.i+1}/${DR.items.length} · ${esc(it.src||'')}</small><h2>QUESTION</h2><p class=q>${esc(it.q)}</p>${DR.rev?`<p><small>Your answer</small><br>${esc(DR.ans)||'—'}</p><h3>ANSWER</h3><p class=q>${esc(it.a)}</p><button class=b data-a=dg data-v=1>✅ Correct</button><button class=b data-a=dg data-v=.5>⚠️ Partial</button><button class=b data-a=dg data-v=0>❌ Incorrect</button>`:'<textarea id=da rows=4 placeholder="Answer from memory"></textarea><button class=b data-a=dr>REVEAL ANSWER</button>'}<p><button class=b data-a=dx>Exit</button></p></div>`}
+function render(){document.documentElement.setAttribute('data-theme',S.theme);$('#app').innerHTML=({home,chess,memory,entrance,notes,progress}[tab])();$('#ov').innerHTML=ovl();$('#ul').innerHTML=[...new Set(Object.values(S.units).flat().map(u=>u.t))].map(t=>`<option value="${esc(t)}">`).join('');
+$('#nav').innerHTML=['home','chess','memory','entrance','notes','progress'].map(t=>`<button class="${t==tab?'on':''}" data-a=tab data-v=${t}>${t.toUpperCase()}</button>`).join('')}
+const A={};
+A.tab=v=>{tab=v;render()};
+A.tg=v=>{let[k,id]=v.split('|');S.tasks[k]=S.tasks[k]||{};S.tasks[k][id]=((S.tasks[k][id]||0)+1)%3;save();render()};
+A.tm=v=>{if(S.timer){let k=today(),e=(Date.now()-S.timer.t0)/1000;S.time[k]=S.time[k]||{};S.time[k][S.timer.c]=(S.time[k][S.timer.c]||0)+e;let same=S.timer.c==v;S.timer=same?null:{c:v,t0:Date.now()}}else S.timer={c:v,t0:Date.now()};save();render()};
+A.ms=t=>{let n=S.lv[t]||4;M={t,items:gen(t,n),ph:'show'};setTimeout(()=>{if(M&&M.ph=='show'){M.ph='in';render()}},n*(t=='words'?1500:1000));render()};
+A.mc=()=>{let v=$('#mi').value.trim().toLowerCase(),t=M.t,tok=(t=='num'||t=='back')?v.replace(/\D/g,'').split(''):v.split(/[\s,·.]+/).filter(Boolean),exp=M.items.map(x=>x.toLowerCase());if(t=='back')exp.reverse();let ok=exp.filter((x,i)=>tok[i]==x).length,pf=ok==exp.length&&tok.length==exp.length,m=S.ms[t]=S.ms[t]||{n:0,ok:0};m.n+=exp.length;m.ok+=ok;S.lv[t]=Math.max(3,(S.lv[t]||4)+(pf?1:-1));M.ph='res';M.ok=ok;M.exp=exp;M.perfect=pf;save();render()};
+A.mx=()=>{M=null;render()};
+A.ra=()=>{let a=$('#rt').value.trim(),b=$('#rx').value.trim();if(!a||!b)return;S.recall.push({id:Date.now(),title:a,text:b,t0:Date.now(),st:[0,0,0,0],sc:[]});save();render()};
+A.rt=v=>{RT={id:+v,rev:false};render()};A.rr=()=>{RT.ans=$('#ra').value;RT.rev=true;render()};
+A.rg=v=>{let r=S.recall.find(x=>x.id==RT.id),s=nxt(r);r.st[s]=1;r.sc[s]=+v;save();RT=null;render()};
+A.cs=()=>{CM.n=+$('#cn').value;CM.t=+$('#ct').value;CM.pos=genPos(CM.n);CM.ph='show';CM.left=CM.t;clearInterval(CM.iv);CM.iv=setInterval(()=>{CM.left--;if(CM.left<=0){clearInterval(CM.iv);CM.ph='build';CM.b={};CM.t0=Date.now()}render()},1000);render()};
+A.cp=v=>{CM.sel=v;render()};A.cq=v=>{if(CM.sel=='x')delete CM.b[v];else CM.b[v]=CM.sel;render()};
+A.cf=()=>{let P=CM.pos,K=Object.keys(P),B=Object.keys(CM.b);CM.ok=K.filter(s=>CM.b[s]==P[s]).length;CM.wr=B.filter(s=>CM.b[s]!=P[s]).length;CM.mi=K.filter(s=>!CM.b[s]).length;CM.time=Math.round((Date.now()-CM.t0)/1000);CM.ph='res';S.chess.n+=CM.n;S.chess.ok+=CM.ok;S.chess.runs++;save();render()};
+A.cx=()=>{CM.ph='idle';render()};
+function drill(items){DR={items,i:0,rev:false,t:{1:0,.5:0,0:0}};render()}
+A.dr=()=>{DR.ans=$('#da').value;DR.rev=true;render()};
+A.dg=v=>{v=+v;let it=DR.items[DR.i];DR.t[v]++;S.dr.n++;S.dr.ok+=v;it.cb&&it.cb(v);DR.i++;DR.rev=false;save();render()};
+A.dx=()=>{DR=null;render()};
+A.qa=()=>{let q=$('#qq').value.trim(),a=$('#qa').value.trim();if(!q||!a)return;S.qb.push({s:$('#qs').value,g:$('#qg').value,t:$('#qt').value.trim()||'General',q,a,n:0,ok:0});save();render()};
+A.qp=()=>{let it=S.qb.map(q=>({q:q.q,a:q.a,src:q.s+' – '+q.t,k:(q.n?q.ok/q.n:.5)+Math.random()*.3,cb:s=>{q.n++;q.ok+=s}})).sort((a,b)=>a.k-b.k).slice(0,10);if(it.length)drill(it)};
+A.nn=()=>{NT={id:null};render()};A.no=v=>{NT={id:+v};render()};
+A.fmt=v=>{let[c,a]=v.split('|');document.execCommand(c,false,a||null)};
+A.ns=()=>{let o={s:$('#ns').value,g:$('#ng').value,u:$('#nu').value.trim()||'—',p:$('#np').value.trim()||'Untitled',h:$('#ed').innerHTML},n=S.notes.find(x=>NT.id&&x.id==NT.id);if(n)Object.assign(n,o);else{o.id=Date.now();S.notes.push(o);NT.id=o.id}save();render()};
+A.nd=()=>{S.notes=S.notes.filter(x=>x.id!=NT.id);NT=null;save();render()};
+A.nt=()=>{let t=$('#ed').innerText,src=$('#np').value||'Note',it=t.split('\n').map(s=>s.trim()).filter(s=>s.length>4).map(l=>{let m=l.match(/^(.+?)\s*[:=]\s*(.+)$/);if(m)return{q:m[1]+' → ?',a:m[2],src};let w=l.split(/\s+/);if(w.length<4)return{q:l+' → (recall the details)',a:l,src};let h=w.length>>1;return{q:w.slice(0,h).join(' ')+' …',a:w.slice(h).join(' '),src}});if(it.length)drill(it.sort(()=>Math.random()-.5))};
+A.rv=()=>{S.rev[today()]=[0,1,2,3,4].map(i=>$('#rv'+i).value);save();render()};
+A.rs=v=>{v=+v;S.rest=S.rest.includes(v)?S.rest.filter(x=>x!=v):[...S.rest,v];save();render()};
+A.th=()=>{S.theme=S.theme==''?'dark':S.theme=='dark'?'light':'';save();render()};
+A.ud=v=>{let[s,i]=v.split('|');S.units[s].splice(+i,1);save();render()};
+A.ua=s=>{let t=$('#un-'+s).value.trim();if(!t)return;(S.units[s]=S.units[s]||[]).push({t,g:$('#ug-'+s).value});save();render()};
+document.addEventListener('change',e=>{let d=e.target.dataset;if(d&&d.c=='ue'){let[s,i]=d.v.split('|');S.units[s][+i].t=e.target.value;save()}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});
+document.addEventListener('click',e=>{let b=e.target.closest('[data-a]');if(b&&A[b.dataset.a])A[b.dataset.a](b.dataset.v)});
+document.addEventListener('mousedown',e=>{if(e.target.closest('[data-a=fmt]'))e.preventDefault()});
+setInterval(()=>{if(S.timer){let s=Math.floor((Date.now()-S.timer.t0)/1000),t=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');document.querySelectorAll('.tk').forEach(e=>e.textContent=t)}},1000);
+render();pull();
+</script></body></html>
